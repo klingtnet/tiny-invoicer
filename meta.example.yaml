@@ -1,0 +1,14 @@
+address: |
+  Max Musterfrau
+  Musterstraße
+  01234 Stadt
+  Germany
+logo: https://klingt.net/assets/logo.svg
+phone: +4912345678910
+website: https://www.klingt.net
+tax_number: 123/456/78910
+bank_details:
+  owner: Andreas Linz
+  name: MyBank
+  iban: DE75512108001245126199
+  bic: BICIIE2D

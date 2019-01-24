@@ -1,0 +1,16 @@
+address: |
+  Beispielfirma
+  Maria Mustermann
+  Beispielstraße 123
+  98765 Musterstadt
+  Germany
+date: 2019-01-21
+services:
+  - descr: Implementierung eines Rechnugsgenerators in Python
+    qty: 3
+    unit: Stunden
+    price: 50
+  - descr: Schreiben von Dokumentation
+    qty: 0.5
+    unit: Stunden
+    price: 40

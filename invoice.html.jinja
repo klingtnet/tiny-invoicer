@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <style>
+.invoice-header {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.company-logo {
+  width: 3em;
+}
+
+.company-logo > img {
+  width: 100%;
+}
+
+.invoice-meta {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.invoice-table {
+  width: 100%;
+  text-align: center;
+}
+
+.invoice-total-title {
+  text-align: right;
+  font-weight: bold;
+}
+
+.invoice-footer {
+  display: grid;
+  grid-template-columns:  repeat(3, 1fr);
+}
+    </style>
+  </head>
+  <body>      
+    <header>
+      <div class="invoice-header">
+        <div class="company-logo">
+          <img src="{{ meta.logo }}" alt="company logo">
+        </div>
+        <div class="company-address">
+          <address>{{ meta.addr() }}</address>
+          <a href="{{ meta.website }}">{{ meta.website }}</a>
+        </div>
+      </div>
+    </header>
+    <h1>Rechnung</h1>
+    <div class="invoice-meta">
+      <div class="invoice-address">
+        <address>{{ invoice.addr() }}</address>
+      </div>
+      <div class="invoice-details">
+        <span class="invoice-number">
+          Rechnungsnummer:
+        </span>
+        {{ invoice.number() }}<br>
+        <span class="invoice-date">
+          Rechnungsdatum:
+        </span>
+        <time datetime="{{ invoice.date }}">{{ invoice.date }}</time>
+      </div>
+    </div>
+    <h2>Leistungen</h2>
+    <div class="invoice-services">
+      <table class="invoice-table">
+        <thead>
+          <tr>
+            <th class="invoice-item-position">Position</th>
+            <th class="invoice-item-description">Beschreibung</th>
+            <th class="invoice-item-quantity">Anzahl</th>
+            <th class="invoice-item-unit">Einheit</th>
+            <th class="invoice-item-price">Preis</th>
+            <th class="invoice-item-total-net">Netto</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for service in invoice.services %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ service.descr }}</td>
+            <td>{{ service.qty }}</td>
+            <td>{{ service.unit }}</td>
+            <td>{{ "%.2f"|format(service.price) }}€</td>
+            <td>{{ "%.2f"|format(service.net) }}€</td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td colspan="5" class="invoice-total-title">Gesamtbetrag</td>
+            <td class="invoice-total-amount">{{ "%.2f"|format(invoice.net_total()) }}€</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="invoice-message">
+      <p>Bitte bezahlen Sie die Rechnung innerhalb von 14 Tagen ab Rechnungsdatum.</p>
+      <p>
+          Mit besten Grüßen<br>
+          Andreas Linz
+      </p>
+    </div>
+    <hr>
+    <footer>
+      <div class="invoice-footer">
+          <div class="company-address">
+            <address>{{ meta.addr() }}</address>
+            <a href="{{ meta.website }}">{{ meta.website }}</a>
+          </div>
+          <div class="company-tax-info">
+            Steuernummer:
+            <span class="company-tax-number">{{ meta.bank_details.tax_number }}</span>
+          </div>
+          <div class="company-bank-details">
+            <table>
+              <tbody>
+                <tr>
+                  <td colspan="2">{{ meta.bank_details.name }}</td>
+                </tr>
+                <tr>
+                  <td>IBAN</td><td>{{ meta.bank_details.iban }}</td>
+                </tr>
+                <tr>
+                  <td>BIC</td><td>{{ meta.bank_details.bic }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </footer>
+  </body>
+</html>
