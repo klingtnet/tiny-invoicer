@@ -1,19 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
   <head>
     <meta charset="utf-8">
     <style>
+body {
+  margin: 3em;
+  font-family: sans-serif;
+}
+
 .invoice-header {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+  align-items: center;
 }
 
 .company-logo {
-  width: 3em;
+  width: 4em;
 }
 
 .company-logo > img {
   width: 100%;
+}
+
+.monospaced {
+  font-family: monospace;
+  font-size: 1rem;
+}
+
+.right {
+  text-align: right;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.company-name {
+  font-style: italic;
+  color: blue;
+  font-size: 1.1rem;
 }
 
 .invoice-company {
@@ -24,16 +50,32 @@
 .invoice-table {
   width: 100%;
   text-align: center;
+  {# This is required to style table-rows #}
+  border-collapse: collapse;
+}
+
+.invoice-table-head {
+  background: #eee;
+}
+
+.invoice-table-row {
+  border-bottom: 1px solid black;
 }
 
 .invoice-total-title {
   text-align: right;
-  font-weight: bold;
+}
+
+.invoice-details {
+  text-align: right;
 }
 
 .invoice-footer {
   display: grid;
   grid-template-columns:  repeat(3, 1fr);
+  margin: 5em 0;
+  padding: 1em 0;
+  border-top: 1pt solid black;
 }
     </style>
   </head>
@@ -69,7 +111,7 @@
     <div class="invoice-services">
       <table class="invoice-table">
         <thead>
-          <tr>
+          <tr class="invoice-table-row invoice-table-head">
             <th class="invoice-item-position">Position</th>
             <th class="invoice-item-description">Beschreibung</th>
             <th class="invoice-item-quantity">Anzahl</th>
@@ -80,18 +122,18 @@
         </thead>
         <tbody>
           {% for service in invoice.services %}
-          <tr>
+          <tr class="invoice-table-row">
             <td>{{ loop.index }}</td>
             <td>{{ service.descr }}</td>
             <td>{{ service.qty }}</td>
             <td>{{ service.unit }}</td>
             <td>{{ "%.2f"|format(service.price) }}€</td>
-            <td>{{ "%.2f"|format(service.net) }}€</td>
+            <td class="right">{{ "%.2f"|format(service.net) }}€</td>
           </tr>
           {% endfor %}
           <tr>
             <td colspan="5" class="invoice-total-title">Gesamtbetrag</td>
-            <td class="invoice-total-amount">{{ "%.2f"|format(invoice.net_total()) }}€</td>
+            <td class="invoice-total-amount bold right">{{ "%.2f"|format(invoice.net_total()) }}€</td>
           </tr>
         </tbody>
       </table>
@@ -99,11 +141,10 @@
     <div class="invoice-message">
       <p>Bitte bezahlen Sie die Rechnung innerhalb von 14 Tagen ab Rechnungsdatum.</p>
       <p>
-          Mit besten Grüßen<br>
-          {{ company.name }}
+          Mit besten Grüßen,<br>
+          <span class="company-name">{{ company.name }}</span>
       </p>
     </div>
-    <hr>
     <footer>
       <div class="invoice-footer">
           <div class="company-address">
@@ -112,19 +153,19 @@
           </div>
           <div class="company-tax-info">
             Steuernummer:
-            <span class="company-tax-number">{{ company.tax_number }}</span>
+            <span class="company-tax-number monospaced">{{ company.tax_number }}</span>
           </div>
           <div class="company-bank-details">
             <table>
               <tbody>
                 <tr>
-                  <td colspan="2">{{ company.bank_details.name }}</td>
+                  <td colspan="2" class="bold">{{ company.bank_details.name }}</td>
                 </tr>
                 <tr>
-                  <td>IBAN</td><td>{{ company.bank_details.iban }}</td>
+                  <td class="right">IBAN</td><td class="monospaced">{{ company.bank_details.iban }}</td>
                 </tr>
                 <tr>
-                  <td>BIC</td><td>{{ company.bank_details.bic }}</td>
+                  <td class="right">BIC</td><td class="monospaced">{{ company.bank_details.bic }}</td>
                 </tr>
               </tbody>
             </table>
