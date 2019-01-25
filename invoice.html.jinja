@@ -4,8 +4,12 @@
     <meta charset="utf-8">
     <style>
 body {
-  margin: 3em;
   font-family: sans-serif;
+}
+
+.page {
+  max-width: 60em;
+  margin: 1em auto;
 }
 
 .invoice-header {
@@ -13,6 +17,10 @@ body {
   grid-template-columns: repeat(2, 1fr);
   justify-items: center;
   align-items: center;
+
+  {# right align #}
+  width: 20em;
+  margin: 0 0 0 auto;
 }
 
 .company-logo {
@@ -25,7 +33,7 @@ body {
 
 .monospaced {
   font-family: monospace;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
 .right {
