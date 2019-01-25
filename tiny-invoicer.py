@@ -5,6 +5,7 @@ from datetime import date, datetime
 
 import strictyaml
 from jinja2 import Template
+from babel.dates import format_date
 
 parser = argparse.ArgumentParser(description='A tiny invoice generator')
 parser.add_argument(
@@ -56,11 +57,14 @@ class Service:
 @dataclass
 class Invoice:
     address: str
-    date: datetime
+    _date: datetime
     services: List[Service]
 
+    def date(self, locale="en_US") -> str:
+        return format_date(self._date, locale=locale)
+
     def number(self) -> str:
-        return date.isoformat()
+        return self._date.isoformat()
 
     def net_total(self) -> float:
         total = 0.0

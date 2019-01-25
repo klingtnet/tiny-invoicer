@@ -115,7 +115,7 @@ body {
             </tr>
             <tr>
               <td class="invoice-date right">Rechnungsdatum:</td>
-              <td><time datetime="{{ invoice.date }}">{{ invoice.date }}</time></td>
+              <td><time datetime="{{ invoice.date() }}">{{ invoice.date("de_DE") }}</time></td>
             </tr>
           </table>
         </div>
