@@ -16,7 +16,7 @@
   width: 100%;
 }
 
-.invoice-meta {
+.invoice-company {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
@@ -37,20 +37,20 @@
 }
     </style>
   </head>
-  <body>      
+  <body>
     <header>
       <div class="invoice-header">
         <div class="company-logo">
-          <img src="{{ meta.logo }}" alt="company logo">
+          <img src="{{ company.logo }}" alt="company logo">
         </div>
         <div class="company-address">
-          <address>{{ meta.addr() }}</address>
-          <a href="{{ meta.website }}">{{ meta.website }}</a>
+          <address>{{ company.addr() }}</address>
+          <a href="{{ company.website }}">{{ company.website }}</a>
         </div>
       </div>
     </header>
     <h1>Rechnung</h1>
-    <div class="invoice-meta">
+    <div class="invoice-company">
       <div class="invoice-address">
         <address>{{ invoice.addr() }}</address>
       </div>
@@ -107,24 +107,24 @@
     <footer>
       <div class="invoice-footer">
           <div class="company-address">
-            <address>{{ meta.addr() }}</address>
-            <a href="{{ meta.website }}">{{ meta.website }}</a>
+            <address>{{ company.addr() }}</address>
+            <a href="{{ company.website }}">{{ company.website }}</a>
           </div>
           <div class="company-tax-info">
             Steuernummer:
-            <span class="company-tax-number">{{ meta.bank_details.tax_number }}</span>
+            <span class="company-tax-number">{{ company.bank_details.tax_number }}</span>
           </div>
           <div class="company-bank-details">
             <table>
               <tbody>
                 <tr>
-                  <td colspan="2">{{ meta.bank_details.name }}</td>
+                  <td colspan="2">{{ company.bank_details.name }}</td>
                 </tr>
                 <tr>
-                  <td>IBAN</td><td>{{ meta.bank_details.iban }}</td>
+                  <td>IBAN</td><td>{{ company.bank_details.iban }}</td>
                 </tr>
                 <tr>
-                  <td>BIC</td><td>{{ meta.bank_details.bic }}</td>
+                  <td>BIC</td><td>{{ company.bank_details.bic }}</td>
                 </tr>
               </tbody>
             </table>
