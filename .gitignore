@@ -1,6 +1,6 @@
 /.vscode/
 /venv/
 /**/__pycache__/
-/meta.yaml
+/company.yaml
 /invoice.yaml
 /*.html
