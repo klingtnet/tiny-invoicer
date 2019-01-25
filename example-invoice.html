@@ -4,8 +4,12 @@
     <meta charset="utf-8">
     <style>
 body {
-  margin: 3em;
   font-family: sans-serif;
+}
+
+.page {
+  max-width: 60em;
+  margin: 1em auto;
 }
 
 .invoice-header {
@@ -13,6 +17,10 @@ body {
   grid-template-columns: repeat(2, 1fr);
   justify-items: center;
   align-items: center;
+
+  
+  width: 20em;
+  margin: 0 0 0 auto;
 }
 
 .company-logo {
@@ -25,7 +33,7 @@ body {
 
 .monospaced {
   font-family: monospace;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
 .right {
@@ -80,91 +88,12 @@ body {
     </style>
   </head>
   <body>
-    <header>
-      <div class="invoice-header">
-        <div class="company-logo">
-          <img src="https://klingt.net/assets/logo.svg" alt="company logo">
-        </div>
-        <div class="company-address">
-          <address>Andreas Linz<br>
-Musterstraße<br>
-01234 Stadt<br>
-Germany<br>
-</address>
-          <a href="https://www.klingt.net">https://www.klingt.net</a>
-        </div>
-      </div>
-    </header>
-    <h1>Rechnung</h1>
-    <div class="invoice-company">
-      <div class="invoice-address">
-        <address>Beispielfirma<br>
-Maria Mustermann<br>
-Beispielstraße 123<br>
-98765 Musterstadt<br>
-Germany<br>
-</address>
-      </div>
-      <div class="invoice-details">
-        <span class="invoice-number">
-          Rechnungsnummer:
-        </span>
-        #2019-01-21<br>
-        <span class="invoice-date">
-          Rechnungsdatum:
-        </span>
-        <time datetime="2019-01-21">2019-01-21</time>
-      </div>
-    </div>
-    <h2>Leistungen</h2>
-    <div class="invoice-services">
-      <table class="invoice-table">
-        <thead>
-          <tr class="invoice-table-row invoice-table-head">
-            <th class="invoice-item-position">Position</th>
-            <th class="invoice-item-description">Beschreibung</th>
-            <th class="invoice-item-quantity">Anzahl</th>
-            <th class="invoice-item-unit">Einheit</th>
-            <th class="invoice-item-price">Preis</th>
-            <th class="invoice-item-total-net">Netto</th>
-          </tr>
-        </thead>
-        <tbody>
-          
-          <tr class="invoice-table-row">
-            <td>1</td>
-            <td>Implementierung eines Rechnugsgenerators in Python</td>
-            <td>3.0</td>
-            <td>Stunden</td>
-            <td>50.00€</td>
-            <td class="right">150.00€</td>
-          </tr>
-          
-          <tr class="invoice-table-row">
-            <td>2</td>
-            <td>Schreiben von Dokumentation</td>
-            <td>0.5</td>
-            <td>Stunden</td>
-            <td>40.00€</td>
-            <td class="right">20.00€</td>
-          </tr>
-          
-          <tr>
-            <td colspan="5" class="invoice-total-title">Gesamtbetrag</td>
-            <td class="invoice-total-amount bold right">170.00€</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="invoice-message">
-      <p>Bitte bezahlen Sie die Rechnung innerhalb von 14 Tagen ab Rechnungsdatum.</p>
-      <p>
-          Mit besten Grüßen,<br>
-          <span class="company-name">Andreas Linz</span>
-      </p>
-    </div>
-    <footer>
-      <div class="invoice-footer">
+    <div class="page">
+      <header>
+        <div class="invoice-header">
+          <div class="company-logo">
+            <img src="https://klingt.net/assets/logo.svg" alt="company logo">
+          </div>
           <div class="company-address">
             <address>Andreas Linz<br>
 Musterstraße<br>
@@ -173,26 +102,107 @@ Germany<br>
 </address>
             <a href="https://www.klingt.net">https://www.klingt.net</a>
           </div>
-          <div class="company-tax-info">
-            Steuernummer:
-            <span class="company-tax-number monospaced">123/456/78910</span>
-          </div>
-          <div class="company-bank-details">
-            <table>
-              <tbody>
-                <tr>
-                  <td colspan="2" class="bold">MyBank</td>
-                </tr>
-                <tr>
-                  <td class="right">IBAN</td><td class="monospaced">DE75512108001245126199</td>
-                </tr>
-                <tr>
-                  <td class="right">BIC</td><td class="monospaced">BICIIE2D</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        </div>
+      </header>
+      <h1>Rechnung</h1>
+      <div class="invoice-company">
+        <div class="invoice-address">
+          <address>Beispielfirma<br>
+Maria Mustermann<br>
+Beispielstraße 123<br>
+98765 Musterstadt<br>
+Germany<br>
+</address>
+        </div>
+        <div class="invoice-details">
+          <span class="invoice-number">
+            Rechnungsnummer:
+          </span>
+          <span class="monospaced">#2019-01-21</span><br>
+          <span class="invoice-date">
+            Rechnungsdatum:
+          </span>
+          <time datetime="2019-01-21">2019-01-21</time>
+        </div>
       </div>
-    </footer>
+      <h2>Leistungen</h2>
+      <div class="invoice-services">
+        <table class="invoice-table">
+          <thead>
+            <tr class="invoice-table-row invoice-table-head">
+              <th class="invoice-item-position">Position</th>
+              <th class="invoice-item-description">Beschreibung</th>
+              <th class="invoice-item-quantity">Anzahl</th>
+              <th class="invoice-item-unit">Einheit</th>
+              <th class="invoice-item-price">Preis</th>
+              <th class="invoice-item-total-net">Netto</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr class="invoice-table-row">
+              <td>1</td>
+              <td>Implementierung eines Rechnugsgenerators in Python</td>
+              <td>3.0</td>
+              <td>Stunden</td>
+              <td>50.00€</td>
+              <td class="right">150.00€</td>
+            </tr>
+            
+            <tr class="invoice-table-row">
+              <td>2</td>
+              <td>Schreiben von Dokumentation</td>
+              <td>0.5</td>
+              <td>Stunden</td>
+              <td>40.00€</td>
+              <td class="right">20.00€</td>
+            </tr>
+            
+            <tr>
+              <td colspan="5" class="invoice-total-title">Gesamtbetrag</td>
+              <td class="invoice-total-amount bold right">170.00€</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="invoice-message">
+        <p>Bitte bezahlen Sie die Rechnung innerhalb von 14 Tagen ab Rechnungsdatum.</p>
+        <p>
+            Mit besten Grüßen,<br>
+            <span class="company-name">Andreas Linz</span>
+        </p>
+      </div>
+      <footer>
+        <div class="invoice-footer">
+            <div class="company-address">
+              <address>Andreas Linz<br>
+Musterstraße<br>
+01234 Stadt<br>
+Germany<br>
+</address>
+              <a href="https://www.klingt.net">https://www.klingt.net</a>
+            </div>
+            <div class="company-tax-info">
+              Steuernummer:
+              <span class="company-tax-number monospaced">123/456/78910</span>
+            </div>
+            <div class="company-bank-details">
+              <table>
+                <tbody>
+                  <tr>
+                    <td colspan="2" class="bold">MyBank</td>
+                  </tr>
+                  <tr>
+                    <td class="right">IBAN</td><td class="monospaced">DE75512108001245126199</td>
+                  </tr>
+                  <tr>
+                    <td class="right">BIC</td><td class="monospaced">BICIIE2D</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>
