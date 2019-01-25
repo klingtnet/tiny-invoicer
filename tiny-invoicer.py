@@ -41,7 +41,7 @@ class Company:
     bank_details: BankDetails
 
     def addr(self) -> str:
-        return to_html_addr(self.address)
+        return to_html_addr('\n'.join([self.name, self.address]))
 
 
 @dataclass
