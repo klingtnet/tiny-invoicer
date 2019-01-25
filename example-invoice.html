@@ -8,7 +8,7 @@ body {
 }
 
 .page {
-  max-width: 60em;
+  max-width: 50em;
   margin: 1em auto;
 }
 
@@ -33,7 +33,7 @@ body {
 
 .monospaced {
   font-family: monospace;
-  font-size: 1.1rem;
+  font-size: 1.1em;
 }
 
 .right {
@@ -56,6 +56,7 @@ body {
 }
 
 .invoice-table {
+  font-size: 0.9rem;
   width: 100%;
   text-align: center;
   
@@ -74,8 +75,9 @@ body {
   text-align: right;
 }
 
-.invoice-details {
-  text-align: right;
+.invoice-details > table {
+  
+  margin: 0 0 0 auto;
 }
 
 .invoice-footer {
@@ -115,14 +117,16 @@ Germany<br>
 </address>
         </div>
         <div class="invoice-details">
-          <span class="invoice-number">
-            Rechnungsnummer:
-          </span>
-          <span class="monospaced">#2019-01-21</span><br>
-          <span class="invoice-date">
-            Rechnungsdatum:
-          </span>
-          <time datetime="2019-01-21">2019-01-21</time>
+          <table>
+            <tr>
+              <td class="invoice-number right">Rechnungsnummer:</td>
+              <td class="monospaced">#2019-01-21</td>
+            </tr>
+            <tr>
+              <td class="invoice-date right">Rechnungsdatum:</td>
+              <td><time datetime="Jan 21, 2019">21.01.2019</time></td>
+            </tr>
+          </table>
         </div>
       </div>
       <h2>Leistungen</h2>
