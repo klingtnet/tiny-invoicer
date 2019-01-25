@@ -88,97 +88,99 @@ body {
     </style>
   </head>
   <body>
-    <header>
-      <div class="invoice-header">
-        <div class="company-logo">
-          <img src="{{ company.logo }}" alt="company logo">
-        </div>
-        <div class="company-address">
-          <address>{{ company.addr() }}</address>
-          <a href="{{ company.website }}">{{ company.website }}</a>
-        </div>
-      </div>
-    </header>
-    <h1>Rechnung</h1>
-    <div class="invoice-company">
-      <div class="invoice-address">
-        <address>{{ invoice.addr() }}</address>
-      </div>
-      <div class="invoice-details">
-        <span class="invoice-number">
-          Rechnungsnummer:
-        </span>
-        #{{ invoice.number() }}<br>
-        <span class="invoice-date">
-          Rechnungsdatum:
-        </span>
-        <time datetime="{{ invoice.date }}">{{ invoice.date }}</time>
-      </div>
-    </div>
-    <h2>Leistungen</h2>
-    <div class="invoice-services">
-      <table class="invoice-table">
-        <thead>
-          <tr class="invoice-table-row invoice-table-head">
-            <th class="invoice-item-position">Position</th>
-            <th class="invoice-item-description">Beschreibung</th>
-            <th class="invoice-item-quantity">Anzahl</th>
-            <th class="invoice-item-unit">Einheit</th>
-            <th class="invoice-item-price">Preis</th>
-            <th class="invoice-item-total-net">Netto</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for service in invoice.services %}
-          <tr class="invoice-table-row">
-            <td>{{ loop.index }}</td>
-            <td>{{ service.descr }}</td>
-            <td>{{ service.qty }}</td>
-            <td>{{ service.unit }}</td>
-            <td>{{ "%.2f"|format(service.price) }}€</td>
-            <td class="right">{{ "%.2f"|format(service.net) }}€</td>
-          </tr>
-          {% endfor %}
-          <tr>
-            <td colspan="5" class="invoice-total-title">Gesamtbetrag</td>
-            <td class="invoice-total-amount bold right">{{ "%.2f"|format(invoice.net_total()) }}€</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="invoice-message">
-      <p>Bitte bezahlen Sie die Rechnung innerhalb von 14 Tagen ab Rechnungsdatum.</p>
-      <p>
-          Mit besten Grüßen,<br>
-          <span class="company-name">{{ company.name }}</span>
-      </p>
-    </div>
-    <footer>
-      <div class="invoice-footer">
+    <div class="page">
+      <header>
+        <div class="invoice-header">
+          <div class="company-logo">
+            <img src="{{ company.logo }}" alt="company logo">
+          </div>
           <div class="company-address">
             <address>{{ company.addr() }}</address>
             <a href="{{ company.website }}">{{ company.website }}</a>
           </div>
-          <div class="company-tax-info">
-            Steuernummer:
-            <span class="company-tax-number monospaced">{{ company.tax_number }}</span>
-          </div>
-          <div class="company-bank-details">
-            <table>
-              <tbody>
-                <tr>
-                  <td colspan="2" class="bold">{{ company.bank_details.name }}</td>
-                </tr>
-                <tr>
-                  <td class="right">IBAN</td><td class="monospaced">{{ company.bank_details.iban }}</td>
-                </tr>
-                <tr>
-                  <td class="right">BIC</td><td class="monospaced">{{ company.bank_details.bic }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        </div>
+      </header>
+      <h1>Rechnung</h1>
+      <div class="invoice-company">
+        <div class="invoice-address">
+          <address>{{ invoice.addr() }}</address>
+        </div>
+        <div class="invoice-details">
+          <span class="invoice-number">
+            Rechnungsnummer:
+          </span>
+          <span class="monospaced">#{{ invoice.number() }}</span><br>
+          <span class="invoice-date">
+            Rechnungsdatum:
+          </span>
+          <time datetime="{{ invoice.date }}">{{ invoice.date }}</time>
+        </div>
       </div>
-    </footer>
+      <h2>Leistungen</h2>
+      <div class="invoice-services">
+        <table class="invoice-table">
+          <thead>
+            <tr class="invoice-table-row invoice-table-head">
+              <th class="invoice-item-position">Position</th>
+              <th class="invoice-item-description">Beschreibung</th>
+              <th class="invoice-item-quantity">Anzahl</th>
+              <th class="invoice-item-unit">Einheit</th>
+              <th class="invoice-item-price">Preis</th>
+              <th class="invoice-item-total-net">Netto</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for service in invoice.services %}
+            <tr class="invoice-table-row">
+              <td>{{ loop.index }}</td>
+              <td>{{ service.descr }}</td>
+              <td>{{ service.qty }}</td>
+              <td>{{ service.unit }}</td>
+              <td>{{ "%.2f"|format(service.price) }}€</td>
+              <td class="right">{{ "%.2f"|format(service.net) }}€</td>
+            </tr>
+            {% endfor %}
+            <tr>
+              <td colspan="5" class="invoice-total-title">Gesamtbetrag</td>
+              <td class="invoice-total-amount bold right">{{ "%.2f"|format(invoice.net_total()) }}€</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="invoice-message">
+        <p>Bitte bezahlen Sie die Rechnung innerhalb von 14 Tagen ab Rechnungsdatum.</p>
+        <p>
+            Mit besten Grüßen,<br>
+            <span class="company-name">{{ company.name }}</span>
+        </p>
+      </div>
+      <footer>
+        <div class="invoice-footer">
+            <div class="company-address">
+              <address>{{ company.addr() }}</address>
+              <a href="{{ company.website }}">{{ company.website }}</a>
+            </div>
+            <div class="company-tax-info">
+              Steuernummer:
+              <span class="company-tax-number monospaced">{{ company.tax_number }}</span>
+            </div>
+            <div class="company-bank-details">
+              <table>
+                <tbody>
+                  <tr>
+                    <td colspan="2" class="bold">{{ company.bank_details.name }}</td>
+                  </tr>
+                  <tr>
+                    <td class="right">IBAN</td><td class="monospaced">{{ company.bank_details.iban }}</td>
+                  </tr>
+                  <tr>
+                    <td class="right">BIC</td><td class="monospaced">{{ company.bank_details.bic }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>
