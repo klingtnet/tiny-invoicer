@@ -75,8 +75,9 @@ body {
   text-align: right;
 }
 
-.invoice-details {
-  text-align: right;
+.invoice-details > table {
+  {# right align #}
+  margin: 0 0 0 auto;
 }
 
 .invoice-footer {
@@ -107,14 +108,16 @@ body {
           <address>{{ invoice.addr() }}</address>
         </div>
         <div class="invoice-details">
-          <span class="invoice-number">
-            Rechnungsnummer:
-          </span>
-          <span class="monospaced">#{{ invoice.number() }}</span><br>
-          <span class="invoice-date">
-            Rechnungsdatum:
-          </span>
-          <time datetime="{{ invoice.date }}">{{ invoice.date }}</time>
+          <table>
+            <tr>
+              <td class="invoice-number right">Rechnungsnummer:</td>
+              <td class="monospaced">#{{ invoice.number() }}</td>
+            </tr>
+            <tr>
+              <td class="invoice-date right">Rechnungsdatum:</td>
+              <td><time datetime="{{ invoice.date }}">{{ invoice.date }}</time></td>
+            </tr>
+          </table>
         </div>
       </div>
       <h2>Leistungen</h2>
