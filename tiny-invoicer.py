@@ -8,9 +8,9 @@ from jinja2 import Template
 
 parser = argparse.ArgumentParser(description='A tiny invoice generator')
 parser.add_argument(
-    'meta',
+    'company',
     type=argparse.FileType('r'),
-    help='path to the meta.yaml that contains details about the company')
+    help='path to the company.yaml that contains details about the company')
 parser.add_argument(
     'invoice',
     type=argparse.FileType('r'),
@@ -31,8 +31,9 @@ class BankDetails:
 
 
 @dataclass
-class Meta:
+class Company:
     address: str
+    name: str
     logo: str
     phone: str
     website: str
@@ -71,7 +72,7 @@ class Invoice:
         return to_html_addr(self.address)
 
 
-with args.meta as f:
+with args.company as f:
     yml = strictyaml.load(f.read())
     bd = yml.get('bank_details')
     bank_details = BankDetails(
@@ -79,8 +80,9 @@ with args.meta as f:
         bd.get('name').data,
         bd.get('iban').data,
         bd.get('bic').data)
-    meta = Meta(
+    company = Company(
         yml.get('address').data,
+        yml.get('name').data,
         yml.get('logo').data,
         yml.get('phone').data,
         yml.get('website').data,
@@ -102,4 +104,4 @@ with args.invoice as f:
 
 with open('invoice.html.jinja') as f:
     template = Template(f.read())
-    print(template.render(meta=meta, invoice=invoice))
+    print(template.render(company=company, invoice=invoice))

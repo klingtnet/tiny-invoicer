@@ -7,7 +7,7 @@ A super simple Python script for generating HTML invoices.
 ## Example
 
 ```sh
-$ venv/bin/python invoicer.py company.example.yaml invoice.example.yaml > example-invoice.html
+$ venv/bin/python tiny-invoicer.py company.example.yaml invoice.example.yaml > example-invoice.html
 ```
 
 You can see a preview of the generated invoice [here][example]
