@@ -164,10 +164,13 @@ body {
               <address>{{ company.addr() }}</address>
               <a href="{{ company.website }}">{{ company.website }}</a>
             </div>
+            {% if company.tax_number %}
             <div class="company-tax-info">
               Steuernummer:
               <span class="company-tax-number monospaced">{{ company.tax_number }}</span>
             </div>
+            {% endif %}
+            {% if company.bank_details.name %}
             <div class="company-bank-details">
               <table>
                 <tbody>
@@ -183,6 +186,7 @@ body {
                 </tbody>
               </table>
             </div>
+            {% endif %}
         </div>
       </footer>
     </div>
