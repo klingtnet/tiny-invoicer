@@ -59,6 +59,7 @@ class Invoice:
     address: str
     _date: datetime
     services: List[Service]
+    message: str
 
     def date(self, locale="en_US") -> str:
         return format_date(self._date, locale=locale)
@@ -104,7 +105,7 @@ with args.invoice as f:
             Service(
                 service.get('descr').data, qty,
                 service.get('unit').data, price, net))
-    invoice = Invoice(yml.get('address').data, date, services)
+    invoice = Invoice(yml.get('address').data, date, services, yml.get('message', default='').__str__())
 
 with open('invoice.html.jinja') as f:
     template = Template(f.read())

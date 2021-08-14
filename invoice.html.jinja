@@ -152,7 +152,7 @@ body {
         </table>
       </div>
       <div class="invoice-message">
-        <p>Bitte bezahlen Sie die Rechnung innerhalb von 14 Tagen ab Rechnungsdatum.</p>
+        <p>{% if invoice.message %}{{ invoice.message }}{% else %}Bitte bezahlen Sie die Rechnung innerhalb von 14 Tagen ab Rechnungsdatum.{% endif %}</p>
         <p>
             Mit besten Grüßen,<br>
             <span class="company-name">{{ company.name }}</span>
