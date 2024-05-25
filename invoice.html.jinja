@@ -1,190 +1,196 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="utf-8">
-    <style>
-body {
-  font-family: sans-serif;
-}
 
-.page {
-  max-width: 50em;
-  margin: 1em auto;
-}
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      font-family: sans-serif;
+    }
 
-.invoice-header {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  justify-items: center;
-  align-items: center;
-  width: 20em;
-  margin: 0 0 0 auto;
-}
+    .page {
+      max-width: 50em;
+      margin: 1em auto;
+    }
 
-.company-logo {
-  width: 4em;
-}
+    .invoice-header {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      justify-items: center;
+      align-items: center;
+      width: 20em;
+      margin: 0 0 0 auto;
+    }
 
-.company-logo > img {
-  width: 100%;
-}
+    .company-logo {
+      width: 4em;
+    }
 
-.monospaced {
-  font-family: monospace;
-  font-size: 1.1em;
-}
+    .company-logo>img {
+      width: 100%;
+    }
 
-.right {
-  text-align: right;
-}
+    .monospaced {
+      font-family: monospace;
+      font-size: 1.1em;
+    }
 
-.bold {
-  font-weight: bold;
-}
+    .right {
+      text-align: right;
+    }
 
-.company-name {
-  font-style: italic;
-  color: blue;
-  font-size: 1.1rem;
-}
+    .bold {
+      font-weight: bold;
+    }
 
-.invoice-company {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
+    .company-name {
+      font-style: italic;
+      color: blue;
+      font-size: 1.1rem;
+    }
 
-.invoice-table {
-  font-size: 0.9rem;
-  width: 100%;
-  text-align: center;
-  border-collapse: collapse;
-}
+    .invoice-company {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
 
-.invoice-table-head {
-  background: #eee;
-}
+    .invoice-table {
+      font-size: 0.9rem;
+      width: 100%;
+      text-align: center;
+      border-collapse: collapse;
+    }
 
-.invoice-table-row {
-  border-bottom: 1px solid black;
-}
+    .invoice-table-head {
+      background: #eee;
+    }
 
-.invoice-total-title {
-  text-align: right;
-}
+    .invoice-table-row {
+      border-bottom: 1px solid black;
+    }
 
-.invoice-details > table {
-  margin: 0 0 0 auto;
-}
+    .invoice-total-title {
+      text-align: right;
+    }
 
-.invoice-footer {
-  display: grid;
-  grid-template-columns:  repeat(3, 1fr);
-  margin: 5em 0;
-  padding: 1em 0;
-  border-top: 1pt solid black;
-}
-    </style>
-  </head>
-  <body>
-    <div class="page">
-      <header>
-        <div class="invoice-header">
-          <div class="company-logo">
-            <img src="{{ company.logo }}" alt="company logo">
-          </div>
-          <div class="company-address">
-            <address>{{ company.addr() }}</address>
-            <a href="{{ company.website }}">{{ company.website }}</a>
-          </div>
+    .invoice-details>table {
+      margin: 0 0 0 auto;
+    }
+
+    .invoice-footer {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin: 5em 0;
+      padding: 1em 0;
+      border-top: 1pt solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header>
+      <div class="invoice-header">
+        <div class="company-logo">
+          <img src="{{ company.logo }}" alt="company logo">
         </div>
-      </header>
-      <h1>Rechnung</h1>
-      <div class="invoice-company">
-        <div class="invoice-address">
-          <address>{{ invoice.addr() }}</address>
-        </div>
-        <div class="invoice-details">
-          <table>
-            <tr>
-              <td class="invoice-number right">Rechnungsnummer:</td>
-              <td class="monospaced">#{{ invoice.number() }}</td>
-            </tr>
-            <tr>
-              <td class="invoice-date right">Rechnungsdatum:</td>
-              <td><time datetime="{{ invoice.date() }}">{{ invoice.date("de_DE") }}</time></td>
-            </tr>
-          </table>
+        <div class="company-address">
+          <address>{{ company.addr() }}</address>
+          <a href="{{ company.website }}">{{ company.website }}</a>
         </div>
       </div>
-      <h2>Leistungen</h2>
-      <div class="invoice-services">
-        <table class="invoice-table">
-          <thead>
-            <tr class="invoice-table-row invoice-table-head">
-              <th class="invoice-item-position">Position</th>
-              <th class="invoice-item-description">Beschreibung</th>
-              <th class="invoice-item-quantity">Anzahl</th>
-              <th class="invoice-item-unit">Einheit</th>
-              <th class="invoice-item-price">Preis</th>
-              <th class="invoice-item-total-net">Netto</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for service in invoice.services %}
-            <tr class="invoice-table-row">
-              <td>{{ loop.index }}</td>
-              <td>{{ service.descr }}</td>
-              <td>{{ service.qty }}</td>
-              <td>{{ service.unit }}</td>
-              <td>{{ "%.2f"|format(service.price) }}€</td>
-              <td class="right">{{ "%.2f"|format(service.net) }}€</td>
-            </tr>
-            {% endfor %}
-            <tr>
-              <td colspan="5" class="invoice-total-title">Gesamtbetrag</td>
-              <td class="invoice-total-amount bold right">{{ "%.2f"|format(invoice.net_total()) }}€</td>
-            </tr>
-          </tbody>
+    </header>
+    <h1>Rechnung</h1>
+    <div class="invoice-company">
+      <div class="invoice-address">
+        <address>{{ invoice.addr() }}</address>
+      </div>
+      <div class="invoice-details">
+        <table>
+          <tr>
+            <td class="invoice-number right">Rechnungsnummer:</td>
+            <td class="monospaced">#{{ invoice.number() }}</td>
+          </tr>
+          <tr>
+            <td class="invoice-date right">Rechnungsdatum:</td>
+            <td><time datetime="{{ invoice.date() }}">{{ invoice.date("de_DE") }}</time></td>
+          </tr>
         </table>
       </div>
-      <div class="invoice-message">
-        <p>{% if invoice.message %}{{ invoice.message }}{% else %}Bitte bezahlen Sie die Rechnung innerhalb von 14 Tagen ab Rechnungsdatum.{% endif %}</p>
-        <p>
-            Mit besten Grüßen,<br>
-            <span class="company-name">{{ company.name }}</span>
-        </p>
-      </div>
-      <footer>
-        <div class="invoice-footer">
-            <div class="company-address">
-              <address>{{ company.addr() }}</address>
-              <a href="{{ company.website }}">{{ company.website }}</a>
-            </div>
-            {% if company.tax_number %}
-            <div class="company-tax-info">
-              Steuernummer:
-              <span class="company-tax-number monospaced">{{ company.tax_number }}</span>
-            </div>
-            {% endif %}
-            {% if company.bank_details.name %}
-            <div class="company-bank-details">
-              <table>
-                <tbody>
-                  <tr>
-                    <td colspan="2" class="bold">{{ company.bank_details.name }}</td>
-                  </tr>
-                  <tr>
-                    <td class="right">IBAN</td><td class="monospaced">{{ company.bank_details.iban }}</td>
-                  </tr>
-                  <tr>
-                    <td class="right">BIC</td><td class="monospaced">{{ company.bank_details.bic }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            {% endif %}
-        </div>
-      </footer>
     </div>
-  </body>
+    <h2>Leistungen</h2>
+    <div class="invoice-services">
+      <table class="invoice-table">
+        <thead>
+          <tr class="invoice-table-row invoice-table-head">
+            <th class="invoice-item-position">Position</th>
+            <th class="invoice-item-description">Beschreibung</th>
+            <th class="invoice-item-quantity">Anzahl</th>
+            <th class="invoice-item-unit">Einheit</th>
+            <th class="invoice-item-price">Preis</th>
+            <th class="invoice-item-total-net">Netto</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for service in invoice.services %}
+          <tr class="invoice-table-row">
+            <td>{{ loop.index }}</td>
+            <td>{{ service.descr }}</td>
+            <td>{{ service.qty }}</td>
+            <td>{{ service.unit }}</td>
+            <td>{{ "%.2f"|format(service.price) }}€</td>
+            <td class="right">{{ "%.2f"|format(service.net) }}€</td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td colspan="5" class="invoice-total-title">Gesamtbetrag</td>
+            <td class="invoice-total-amount bold right">{{ "%.2f"|format(invoice.net_total()) }}€</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="invoice-message">
+      <p>{% if invoice.message %}{{ invoice.message }}{% else %}Bitte bezahlen Sie die Rechnung innerhalb von 14 Tagen
+        ab Rechnungsdatum.{% endif %}</p>
+      <p>
+        Mit besten Grüßen,<br>
+        <span class="company-name">{{ company.name }}</span>
+      </p>
+    </div>
+    <footer>
+      <div class="invoice-footer">
+        <div class="company-address">
+          <address>{{ company.addr() }}</address>
+          <a href="{{ company.website }}">{{ company.website }}</a>
+        </div>
+        {% if company.tax_number %}
+        <div class="company-tax-info">
+          Steuernummer:
+          <span class="company-tax-number monospaced">{{ company.tax_number }}</span>
+        </div>
+        {% endif %}
+        {% if company.bank_details.name %}
+        <div class="company-bank-details">
+          <table>
+            <tbody>
+              <tr>
+                <td colspan="2" class="bold">{{ company.bank_details.name }}</td>
+              </tr>
+              <tr>
+                <td class="right">IBAN</td>
+                <td class="monospaced">{{ company.bank_details.iban }}</td>
+              </tr>
+              <tr>
+                <td class="right">BIC</td>
+                <td class="monospaced">{{ company.bank_details.bic }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        {% endif %}
+      </div>
+    </footer>
+  </div>
+</body>
+
 </html>
