@@ -8,6 +8,10 @@
       font-family: sans-serif;
     }
 
+    td {
+      text-align: right;
+    }
+
     .page {
       max-width: 50em;
       margin: 1em auto;
@@ -35,8 +39,8 @@
       font-size: 1.1em;
     }
 
-    .right {
-      text-align: right;
+    .left {
+      text-align: left;
     }
 
     .bold {
@@ -134,12 +138,12 @@
         <tbody>
           {% for service in invoice.services %}
           <tr class="invoice-table-row">
-            <td>{{ loop.index }}</td>
-            <td>{{ service.descr }}</td>
+            <td class="left">{{ loop.index }}</td>
+            <td class="left">{{ service.descr }}</td>
             <td>{{ service.qty }}</td>
             <td>{{ service.unit }}</td>
             <td>{{ "%.2f"|format(service.price) }}€</td>
-            <td class="right">{{ "%.2f"|format(service.net) }}€</td>
+            <td>{{ "%.2f"|format(service.net) }}€</td>
           </tr>
           {% endfor %}
           <tr>
