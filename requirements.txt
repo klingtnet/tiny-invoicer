@@ -1,5 +1,8 @@
 Babel==2.9.1
 Jinja2==2.11.3
-strictyaml==1.7.3
+MarkupSafe==2.0.1
+python-dateutil==2.9.0.post0
+pytz==2024.1
 ruamel.yaml==0.17.4
-markupsafe==2.0.1
+six==1.16.0
+strictyaml==1.7.3
